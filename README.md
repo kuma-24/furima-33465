@@ -2,16 +2,16 @@
 
 ## users テーブル
 
-| Column          | Type   | Options     |
-| --------------- | ------ | ----------- |
-| nickname        | string | null: false |
-| email           | string | null: false |
-| password        | string | null: false |
-| birth-date      | date   | null: false |
-| last-name       | string | null: false |
-| first-name      | string | null: false |
-| last-name-kana  | string | null: false |
-| first-name-kana | string | null: false |
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| nickname           | string | null: false |
+| email              | string | null: false |
+| encrypted_password | string | null: false |
+| birth_date         | date   | null: false |
+| last_name          | string | null: false |
+| first_name         | string | null: false |
+| last_name_kana     | string | null: false |
+| first_name_kana    | string | null: false |
 
 ### Association
 
@@ -22,14 +22,17 @@
 
 ## items テーブル
 
-| Column                   | Type          | Options                        |
-| ------------------------ | ------------- | ------------------------------ |
-| item-name                | text          | null: false                    |
-| item-image               | ActiveStorage | null: false                    |
-| item-info                | text          | null: false                    |
-| item-price               | integer       | null: false                    |
-| item-genre               | references    | null: false, foreign_key: true |
-| user                     | references    | null: false, foreign_key: true |
+| Column                   | Type       | Options                        |
+| ------------------------ | ---------- | ------------------------------ |
+| name                     | text       | null: false                    |
+| info                     | text       | null: false                    |
+| price                    | integer    | null: false                    |
+| item_category            | ActiveHash | null: false                    |
+| item_sales_status        | ActiveHash | null: false                    |
+| item_shipping_fee_status | ActiveHash | null: false                    |
+| item_scheduled_delivery  | ActiveHash | null: false                    |
+| item_prefecture          | ActiveHash | null: false                    |
+| user                     | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -39,64 +42,34 @@
 
 
 
-## item_genres テーブル
-
-| Column                   | Type       | Options                        |
-| ------------------------ | ---------- | ------------------------------ |
-| item-category            | ActiveHash | null: false                    |
-| item-sales-status        | ActiveHash | null: false                    |
-| item-shipping-fee-status | ActiveHash | null: false                    |
-| item-scheduled-delivery  | ActiveHash | null: false                    |
-| prefecture_genre         | references | null: false, foreign_key: true |
-
-### Association
-
-- has_many   :items
-- has_one    :prefecture_genre
-
-
-
 ## orders テーブル
 
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
 | user             | references | null: false, foreign_key: true |
 | item             | references | null: false, foreign_key: true |
-| shipping_address | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
-- belongs_to :shipping_address
+- has_one    :shipping_address
 
 
 
 ## shipping_addresses テーブル
 
-| Column           | Type       | Options                        |
-| ---------------- | ---------- | ------------------------------ |
-| postal-code      | string     | null: false                    |
-| city             | string     | null: false                    |
-| addresses        | string     | null: false                    |
-| building         | string     | null: false                    |
-| phone-number     | string     | null: false                    |
-| prefecture_genre | references | null: false, foreign_key: true |
+| Column       | Type       | Options                        |
+| ------------ | ---------- | ------------------------------ |
+| postal_code  | string     | null: false                    |
+| city         | string     | null: false                    |
+| addresses    | string     | null: false                    |
+| building     | string     |                                |
+| phone_number | string     | null: false                    |
+| prefecture   | ActiveHash | null: false                    |
+| order        | references | null: false, foreign_key: true |
 
 ### Association
 
-- has_many :orders
-- has_one  :prefecture_genre
+- belongs_to :order
 
-
-
-## prefecture_genres
-
-| Column     | Type       | Options |
-| ---------- | ---------- | ------- |
-| prefecture | ActiveHash |         |
- 
-### Association
-
-- belongs_to :item_genre
-- belongs_to :shipping_address
