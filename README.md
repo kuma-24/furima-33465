@@ -37,7 +37,7 @@
 ### Association
 
 - belongs_to :user
-- bas_one    :order
+- has_one    :order
 
 
 
