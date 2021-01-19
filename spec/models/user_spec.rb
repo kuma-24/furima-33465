@@ -6,6 +6,7 @@ RSpec.describe User, type: :model do
 
   describe 'ユーザー新規登録' do
     context '新規登録できるとき' do
+
       it 'nickname、email、password、password_confirmation、birth_date、last_name、first_name、last_name_kana、first_name_kana
       が存在すれば登録できる' do
         expect(@user).to be_valid
@@ -38,6 +39,7 @@ RSpec.describe User, type: :model do
     end
 
     context '新規登録できないとき' do
+
       it 'nicknameが空では登録できない' do
         @user.nickname = nil
         @user.valid?
@@ -59,17 +61,36 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Email is invalid')
       end
-      it '重複したemailが存在する場合登録できない' do
+      it 'emailが重複する場合登録できない' do
         @user.save
         another_user = FactoryBot.build(:user, email: @user.email)
         another_user.valid?
         expect(another_user.errors.full_messages).to include('Email has already been taken')
       end
 
+      
       it 'passwordが空では登録できない' do
         @user.password = ''
         @user.valid?
         expect(@user.errors.full_messages).to include("Password can't be blank")
+      end
+      it 'passwordが英字のみでは登録できない' do
+        @user.password = 'abcdefg'
+        @user.password_confirmation = 'abcdefg'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password is invalid', 'Password confirmation is invalid')
+      end
+      it 'passwordが数字のみでは登録できない' do
+        @user.password = '123456'
+        @user.password_confirmation = '123456'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password is invalid', 'Password confirmation is invalid')
+      end
+      it 'passwordが全角英数字では登録できないこと' do
+        @user.password = '１２３４５６ＡＢＣ'
+        @user.password_confirmation = '１２３４５６ＡＢＣ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password is invalid', 'Password confirmation is invalid')
       end
       it 'passwordが存在してもpassword_confirmationが空では登録できない' do
         @user.password_confirmation = ''
@@ -82,13 +103,13 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
-      it 'passwordが英字のみでは登録できない' do
-        @user.password = 'abcdefg'
-        @user.password_confirmation = 'abcdefg'
-        @user.valid?
-        expect(@user.errors.full_messages).to include('Password is invalid', 'Password confirmation is invalid')
-      end
+      
 
+      it 'last_nameが空では登録できない' do
+        @user.last_name = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name can't be blank")
+      end
       it 'last_nameがひらがなだと登録できない' do
         @user.last_name = 'やまだ'
         @user.valid?
@@ -103,6 +124,12 @@ RSpec.describe User, type: :model do
         @user.last_name = 'ヤマダ'
         @user.valid?
         expect(@user.errors.full_messages).to include('Last name is invalid')
+      end
+
+      it 'first_nameが空では登録できない' do
+        @user.first_name = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name can't be blank")
       end
       it 'first_nameがひらがなだと登録できない' do
         @user.first_name = 'りくたろう'
@@ -119,6 +146,12 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('First name is invalid')
       end
+
+      it 'last_name_kanaが空では登録できない' do
+        @user.last_name_kana = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name kana can't be blank")
+      end
       it 'last_name_kanaがひらがなだと登録できない' do
         @user.last_name_kana = 'やまだ'
         @user.valid?
@@ -133,6 +166,12 @@ RSpec.describe User, type: :model do
         @user.last_name_kana = '山田'
         @user.valid?
         expect(@user.errors.full_messages).to include('Last name kana is invalid')
+      end
+
+      it 'first_name_kanaが空では登録できない' do
+        @user.first_name_kana = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name kana can't be blank")
       end
       it 'first_name_kanaがひらがなだと登録できない' do
         @user.first_name_kana = 'りくたろう'
