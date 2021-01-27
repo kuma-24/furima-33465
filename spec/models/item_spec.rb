@@ -85,55 +85,30 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('User must exist')
       end
 
-      it 'category が空では出品できない' do
-        @item.category_id = nil
-        @item.valid?
-        expect(@item.errors.full_messages).to include('Category is not a number')
-      end
       it 'category_id が0では出品できない' do
         @item.category_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include('Category must be other than 0')
       end
 
-      it 'prefecture が空では出品できない' do
-        @item.prefecture_id = nil
-        @item.valid?
-        expect(@item.errors.full_messages).to include('Prefecture is not a number')
-      end
       it 'prefecture_id が0では出品できない' do
         @item.prefecture_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include('Prefecture must be other than 0')
       end
 
-      it 'sales_status が空では出品できない' do
-        @item.sales_status_id = nil
-        @item.valid?
-        expect(@item.errors.full_messages).to include('Sales status is not a number')
-      end
       it 'sales_status_id が0では出品できない' do
         @item.sales_status_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include('Sales status must be other than 0')
       end
 
-      it 'scheduled_delivery が空では出品できない' do
-        @item.scheduled_delivery_id = nil
-        @item.valid?
-        expect(@item.errors.full_messages).to include('Scheduled delivery is not a number')
-      end
       it 'scheduled_delivery_id が0では出品できない' do
         @item.scheduled_delivery_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include('Scheduled delivery must be other than 0')
       end
 
-      it 'shipping_fee_status が空では出品できない' do
-        @item.shipping_fee_status_id = nil
-        @item.valid?
-        expect(@item.errors.full_messages).to include('Shipping fee status is not a number')
-      end
       it 'shipping_fee_status_id が0では出品できない' do
         @item.shipping_fee_status_id = 0
         @item.valid?
