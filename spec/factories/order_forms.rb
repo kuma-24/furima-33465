@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :order_form do
-
     address                { '青山1-1-1' }
     postal_code            { '123-4567' }
     city                   { Gimei.address.city.kanji }
@@ -11,7 +10,7 @@ FactoryBot.define do
     item_id                { Faker::Number.number(digits: 10) }
     user_id                { Faker::Number.number(digits: 10) }
 
-    token                  { "tok_abcdefghijk00000000000000000" }
+    token                  { 'tok_abcdefghijk00000000000000000' }
     price                  { Faker::Number.between(from: 300, to: 9_999_999) }
   end
 end
