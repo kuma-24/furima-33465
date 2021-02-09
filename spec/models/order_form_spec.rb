@@ -7,8 +7,7 @@ RSpec.describe OrderForm, type: :model do
 
   describe '商品購入機能' do
     context '商品が購入できる' do
-      it 'address, postal_code, city, building, phone_number, delivery_prefecture, token, price,
-      user_id, item_id があれば購入できる' do
+      it 'address, postal_code, city, building, phone_number, delivery_prefecture, token, user_id, item_id があれば購入できる' do
         expect(@order_form).to be_valid
       end
       it 'postal_code が8桁以下且つ、半角数値であれば購入できる' do
@@ -89,11 +88,6 @@ RSpec.describe OrderForm, type: :model do
         @order_form.token = ''
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include("Token can't be blank")
-      end
-      it 'price が空だと購入できない' do
-        @order_form.price = ''
-        @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("Price can't be blank")
       end
       it 'item の情報がないと購入できない' do
         @order_form.item_id = nil

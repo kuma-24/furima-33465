@@ -2,7 +2,7 @@
 
 {
    const salesTax = 0.1
-   const formatter = new Intl.NumberFormat('ja-JA')
+   const formatter = new Intl.NumberFormat('ja-JA');
    const priceInput = document.getElementById("item-price");
    const addTaxPrice = document.getElementById("add-tax-price");
    const proFit = document.getElementById("profit");
