@@ -54,12 +54,12 @@ class ItemsController < ApplicationController
       :name,
       :info,
       :price,
-      :image,
       :category_id,
       :prefecture_id,
       :sales_status_id,
       :scheduled_delivery_id,
-      :shipping_fee_status_id
+      :shipping_fee_status_id,
+      images: [],
     ).merge(user_id: current_user.id)
   end
 end

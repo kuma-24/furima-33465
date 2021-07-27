@@ -20,7 +20,7 @@
         <p>
           クリックしてファイルをアップロード
         </p>
-        <%= f.file_field :image, id:"image" %>
+        <%= f.file_field :images, id:"image", direct_upload: true, multiple: true %>
       </div>
     </div>
     <%# /出品画像 %>

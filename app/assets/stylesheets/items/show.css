@@ -1,4 +1,66 @@
 /* 商品の概要 */
+ #main-image {
+  width: 60vw;
+  margin: 0 auto;
+  list-style: none;
+}
+
+#main-image img {
+  height: 50vh;
+  width: 60vw;
+}
+
+#main-item {
+  width: 60vw;
+  margin: 0 auto;
+  list-style: none;
+}
+
+#main-item img {
+  height: 50vh;
+  width: 60vw;
+}
+
+.thumbnails {
+  display: grid;
+  grid-template-columns: repeat(7, 70px);
+  gap: 5px;
+}
+
+.thumbnails img {
+  width: 70px;
+  height: 70px;
+}
+
+.thumbnails li {
+  cursor: pointer;
+  opacity: 0.4;
+  height: 70px;
+}
+
+.thumbnails li:hover {
+  opacity: 1;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+nav li {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 12px;
+  padding: 4px 25px;
+  text-align: center;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+nav li:hover {
+  background-color: #f8f8f8;
+  user-select: none;
+}
 
 .item-show {
   background-color: #f8f8f8;
@@ -30,7 +92,7 @@
   width: 60vw;
   min-height: 500px;
   background-color: rgb(205, 202, 202);
-  object-fit: contain;
+  /* object-fit: contain; */
 }
 
 .item-price-box {

@@ -7,15 +7,35 @@
       <%= @item.name %>
     </h2>
     <div class='item-img-content'>
-      <%= image_tag @item.image ,class:"item-box-img" %>
+      <main>
+        <%# <img id="main-image" class="item-box-img"> %>
+        <li id="main-image"><%= image_tag @item.images[0] ,class:"item-box-img", id:"main-item" %></li>
+
+        <% if @item.images.attached? %>
+        <ul id="images" class="thumbnails">
+          <% @item.images.each do |image| %>
+            <li><%= image_tag image %></li>
+          <% end %>
+        </ul>
+        <% end %>
      
-      <% if @item.order != nil %>
-        <div class='sold-out'>
-          <span>Sold Out!!</span>
-        </div>
-      <% end %>
-     
+        <% if @item.order != nil %>
+          <div class='sold-out'>
+            <span>Sold Out!!</span>
+          </div>
+        <% end %>
+
+        <nav>
+          <ul>
+            <li id="prev">&lt;</li>
+            <li id="next">&gt;</li>
+          </ul>
+        </nav>
+      </main>
     </div>
+
+    
+
     <div class="item-price-box">
       <span class="item-price">
         ¥<%= @item.price.to_s(:delimited) %>
